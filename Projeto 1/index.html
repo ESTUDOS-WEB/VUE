@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pr-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeto 1</title>
+    <script src="../script/vue.js"></script>
+</head>
+<body>
+    
+    <div id="app">
+        <p>
+            Nome: {{ pessoa.nome }}
+        </p>
+        <p>
+            Idade: {{ pessoa.idade }}
+        </p>
+    </div>
+
+
+    <script>
+
+        const vue = new Vue({
+            el: "#app",
+            data: {
+                pessoa:{
+                    nome: "ana",
+                    idade: 23
+                }   
+            }
+        });
+
+    </script>
+
+</body>
+</html>
