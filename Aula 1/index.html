@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pr-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeto 1</title>
+    <script src="../script/vue.js"></script>
+</head>
+<body>
+    
+    <div id="app">
+        Curso: {{ curso }} <br/>
+        Quantidade de alunos: {{ quantidadeAlunos }} <br/>
+        Material 1: {{ materias[0] }} <br/>
+        Professor nome: {{ professor.nome }} <br/>
+        Professaor e-mail: {{ professor.email }} <br/>
+        Esta finalizado: {{ finalizado }}
+    </div>
+
+
+    <script>
+
+        const vue = new Vue({
+            el: "#app",
+            data: {
+                curso: "React",
+                quantidadeAlunos: 900,
+                finalizado: true,
+                materias:[
+                    "Livro 1",
+                    "Livro 2",
+                    "Livro 3",
+                    "Livro 4",
+                ],
+                professor:{
+                    nome: "Professor 1",
+                    email: "professor1@teste.com"
+                },
+            }
+        });
+
+    </script>
+
+</body>
+</html>
