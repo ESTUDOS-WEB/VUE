@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APP - IMC</title>
+    <script src="../script/vue.js"></script>
+
+    <style>
+        .resultado{
+            width: 300px;
+            height: 100px;
+            background-color: blanchedalmond;
+
+        }
+    </style>
+
+</head>
+<body>
+    
+    <div id="app">
+
+        <p>
+            <label for="peso">Peso: </label> <input type="number" id="peso" v-model="peso" >
+        </p>
+        <p>
+            <label for="altura">Altura: </label> <input type="text" id="altura" v-model="altura" >
+        </p>
+        <p>
+            <button v-on:click="calcular()"> Calcular </button>
+        </p>
+
+        <div class="resultado" v-text="imc">
+            <!-- Resultado -->
+        </div>
+
+        Peso = {{ peso }}<br/>
+        Altura = {{ altura }}<br/>
+        IMC = {{ imc }}
+
+    </div>
+
+    <script>
+
+        const vue = new Vue({
+            el: "#app",
+            data:{
+                peso: 0,
+                altura: 0,
+                imc: 0
+            },
+            methods:{
+                calcular(){
+                    this.imc = this.peso / Math.pow(this.altura, 2);
+                }
+            }
+        });
+
+    </script>
+</body>
+</html>
