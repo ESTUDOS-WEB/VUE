@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabuada</title>
+    <script src="../../script/vue.js"></script>
+
+</head>
+<body>
+    <div id="app">
+        
+        <input type="text" v-model="base" />
+        <button>Gerar</button>
+           <h5 v-for="valor in gerataboada(base)">{{valor}}</h5>       
+
+    </div>
+
+
+ <script>
+
+
+    const vue = new Vue({
+        el:"#app",
+        data:{
+            base:""
+        },
+        methods:{
+            gerataboada(base){
+                let resultado=[]
+                for (let i=0;i<11;i++){
+                    resultado.push(i*base)
+                    console.log(i);
+                }
+               return resultado
+            }
+        }
+    })
+ </script>   
+</body>
+</html>
