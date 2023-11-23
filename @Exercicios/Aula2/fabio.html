@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabuada</title>
+    <script src="../../script/vue.js"></script>
+</head>
+<body>
+
+    <header>
+        <h1> Tabuada </h1>
+    </header>
+
+    <div id="app">
+        <main>
+            <p>
+                <label for="numero">Número: </label> <input type="number" v-model="numero">
+            </p>
+            <p>
+                <button v-on:click="gerarTabuada()">Calcular</button>
+            </p>
+            
+            <div>
+                1 x {{ aux }} = {{ 1 * aux }} <br/> 
+                2 x {{ aux }} = {{ 2 * aux }} <br/> 
+                3 x {{ aux }} = {{ 3 * aux }} <br/> 
+                4 x {{ aux }} = {{ 4 * aux }} <br/> 
+                5 x {{ aux }} = {{ 5 * aux }} <br/> 
+                6 x {{ aux }} = {{ 6 * aux }} <br/> 
+                7 x {{ aux }} = {{ 7 * aux }} <br/> 
+                8 x {{ aux }} = {{ 8 * aux }} <br/> 
+                9 x {{ aux }} = {{ 9 * aux }} <br/> 
+                10 x {{ aux }} = {{ 10 * aux }} <br/> 
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+
+        const vue = new Vue({
+            el:"#app",
+            data: {
+                numero: 1,
+                aux: 1
+            },
+            methods:{
+                gerarTabuada(){
+                    
+                    if(this.numero < 1) alert('Número deve ser maior que 0.');
+                    else if(this.numero > 10) alert('Número deve ser menor ou igual a 10.');
+                    else this.aux = this.numero;
+                
+                }
+            }
+        });
+
+    </script>
+
+</body>
+</html>
