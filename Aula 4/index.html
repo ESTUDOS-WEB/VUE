@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 4</title>
+
+    <script src="../assets/js/vue.js"></script>
+    <link rel="stylesheet" href="../assets/css/style.css">
+
+</head>
+<body>
+    
+
+    <div id="app" class="container">
+
+
+        <table class="table table-hover">
+
+            <thead>
+                <tr>
+                    <th scope="col">Codigo</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Modelo</th>
+                    <th scope="col">Preço</th>
+                    <th scope="col">Ações</th>
+                  </tr>
+            </thead>
+
+            <tbody>
+                <tr v-for="(carro, index) in carros" :key="index">
+                    <td> {{ carro.codigo }} </td>
+                    <td> {{ carro.nome }}</td>
+                    <td> {{ carro.modelo }}</td>
+                    <td> {{ carro.preco }} </td>
+                    <td>
+                        <button class="btn btn-primary mx-2" v-on:click="editar(carro.codigo)"> Editar </button>
+                        <button class="btn btn-danger mx-2" v-on:click="deletar(carro.codigo)"> Deletar </button>
+                    </td>
+                </tr>
+            </tbody>
+
+        </table>
+
+
+
+        <div class="form row m-5">
+            
+            <div class="col-6">
+                <div class="mb-3">
+                    <label for="codigo" class="form-label">codigo</label>
+                    <input type="number" disabled v-model="carroEditando.codigo" class="form-control" id="codigo">
+                  </div>
+            </div>
+
+            <div class="col-6">
+                <div class="mb-3">
+                    <label for="nome" class="form-label">Nome</label>
+                    <input type="text" v-model="carroEditando.nome" class="form-control" id="nome">
+                  </div>
+            </div>
+
+            <div class="col-6">
+                <div class="mb-3">
+                    <label for="modelo" class="form-label">Modelo</label>
+                    <input type="text" v-model="carroEditando.modelo" class="form-control" id="modelo">
+                  </div>
+            </div>
+
+            <div class="col-6">
+                <div class="mb-3">
+                    <label for="preco" class="form-label">Preço</label>
+                    <input type="number" v-model="carroEditando.preco" class="form-control" id="preco">
+                  </div>
+            </div>
+
+            <div class="col">
+                <button v-if="carroEditando.codigo == 0" class="btn btn-success" v-on:click="cadastrar()"> Cadastrar </button>
+                <button v-else class="btn btn-primary" v-on:click="cadastrar()"> Confirmar Edição </button>
+            </div>
+            
+        </div>
+
+
+    </div>
+
+
+    <script>
+
+        const vueOptions ={
+            el: '#app',
+            data:{
+                carros:[
+                    { codigo: 1, nome: 'Carro 1', modelo: 'Modelo 1', preco: '23200' },
+                    { codigo: 2, nome: 'Carro 2', modelo: 'Modelo 2', preco: '25020' },
+                    { codigo: 3, nome: 'Carro 3', modelo: 'Modelo 3', preco: '21000' },
+                    { codigo: 4, nome: 'Carro 4', modelo: 'Modelo 4', preco: '31400' },
+                ],
+                carroEditando: { 
+                    codigo: 0, 
+                    nome: '',
+                    modelo: '',
+                    preco: ''
+                }
+            },
+            methods:{
+                
+                editar(codigo){
+                    this.carroEditando = { ...this.carros.find((c) => c.codigo == codigo) };    
+                },
+
+                deletar(codigo){
+                    const posicao = this.carros.findIndex((c) => c.codigo == codigo);
+                    this.carros.splice(posicao, 1);
+                },
+
+                cadastrar(){
+
+                    if(this.carroEditando.codigo !== 0){
+                        // Editar
+                        const posicao = this.carros.findIndex((c) => c.codigo == this.carroEditando.codigo);
+                        this.carros[posicao].nome = this.carroEditando.nome;
+                        this.carros[posicao].modelo = this.carroEditando.modelo;
+                        this.carros[posicao].preco = this.carroEditando.preco;
+                    }else{
+                        // Cadatrar novo carro
+                        this.carroEditando.codigo =  Math.max( ...this.carros.map( c => c.codigo) ) + 1;
+                        this.carros.push(this.carroEditando);
+                    }
+
+                    this.limparCarroEditado();
+        
+                },
+
+                limparCarroEditado(){
+                    this.carroEditando = {
+                        codigo: 0, 
+                        nome: '',
+                        modelo: '',
+                        preco: ''
+                    }
+                }
+
+            }
+        };
+
+        const vue = new Vue(vueOptions)
+
+    </script>
+
+</body>
+</html>
