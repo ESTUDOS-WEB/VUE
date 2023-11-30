@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="../../assets/js/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <label for="nome">Nome</label><br />
+      <input type="text" v-model="nome" id="nome" placeholder="Nome" /><br />
+      <label for="email">Email</label><br />
+      <input type="text" v-model="email" id="email" placeholder="Email" /><br />
+      <button @click="valida">Gravar</button>
+      <p v-for="erro in erros">{{erro}}</p>
+    </div>
+    <script>
+      new Vue({
+        el: "#app",
+        data: {
+          nome: "",
+          email: "",
+          erros: [],
+        },
+        methods: {
+          valida: function () {
+            this.erros = [];
+            if (!this.nome) {
+              this.erros.push("Nome vazio ou inválido!");
+            }
+            if (!this.email || !this.email.includes("@")) {
+              this.erros.push("Email vazio ou inválido");
+            }
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
